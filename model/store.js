@@ -47,7 +47,6 @@ export const State = {};
  * @callback Subscription
  * @param {State} prev
  * @param {State} next
- * @return {EmptyFn}
  */
 
 /**
@@ -58,7 +57,15 @@ let subscribers = [];
 /**
  * @type {Array<State>}
  */
-const states = [];
+const states = [
+  {
+    phase: "idle",
+    tasks: {},
+    filters: {
+      sorting: "A-Z",
+    },
+  },
+];
 
 /**
  * @return {State}
@@ -73,6 +80,7 @@ export const getState = () => {
 export const dispatch = (action) => {
   const prev = getState();
   const next = reducer(prev, action);
+  subscribers.forEach((item) => item(prev, next));
   states.unshift(next);
 };
 

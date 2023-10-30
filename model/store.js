@@ -5,6 +5,9 @@ import { reducer } from "./reducers.js";
  * @prop {string} id
  * @prop {string} title
  * @prop {Date} created
+ * @prop {'low' | 'normal' | 'high'} urgency
+ * @prop {Date | null} due
+ * @prop {boolean} completed
  */
 
 export const Task = {};

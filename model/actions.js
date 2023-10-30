@@ -43,17 +43,19 @@ export const createUniqueId = () => {
 };
 
 /**
- * @param {object} props
- * @param {string} props.title
+ * @param {Pick<Task, 'title' | 'due' | 'urgency'>} props
  * @returns {AddTask}
  */
 export const addTask = (props) => {
-  const { title } = props;
+  const { title, due, urgency } = props;
   return {
     task: {
       created: new Date(),
       id: createUniqueId(),
       title,
+      completed: false,
+      due,
+      urgency,
     },
     type: "ADD_TASK",
   };

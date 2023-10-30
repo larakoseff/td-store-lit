@@ -8,34 +8,35 @@ import { State } from "../model/store.js"
  */
 export const app = (state) => {
 
-    const { tasks } = state
+    const { tasks, phase } = state
     const tasksAsArray = Object.values(tasks)
 
     return html` 
     <div>
-        <sl-dialog open label="New Task">
+        <sl-dialog .open=${phase === "adding"} label="New Task">
             <form>
                 <td-spacing bottom="xl">
-                <td-spacing bottom="s">    
                 <sl-input filled name="title" label="Title" 
                 required></sl-input>
-                </td-spacing> 
 
                 <td-spacing bottom="s">
-                <sl-input filled name="due" label="Due Date" 
+                <sl-input type="date" filled name="due" label="Due Date" 
                 required></sl-input> 
                 </td-spacing>
 
-                <td-spacing bottom="s">
-                <sl-input filled name="urgency" label="Urgency" 
-                required></sl-input>
-                </td-spacing> 
+                    <td-spacing bottom="s">
+                    <sl-select value="normal" filled label="Urgency">
+                        <sl-option value="high">High</sl-option>
+                        <sl-option value="normal">Normal</sl-option>
+                        <sl-option value="low">Low</sl-option>
+                    </sl-select>
+                    </td-spacing> 
 
                 </td-spacing>
 
                 <div slot="footer">
-                    <sl-button>Cancel</sl-button>
-                    <sl-button variant="primary">Save</sl-button>
+                    <sl-button type="button">Cancel</sl-button>
+                    <sl-button variant="primary" type="submit">Save</sl-button>
                 </div>
             </form>
             </sl-dialog>
